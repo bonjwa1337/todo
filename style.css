@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;900&family=Roboto:wght@400;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    margin-top: 100px;
+}
+
+section {
+    width: 336px;
+    max-height: 397px;
+    margin: auto;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+h1 {
+    margin-bottom: 25px;
+    font-weight: 900;
+    font-size: 26px;
+}
+
+input {
+    margin-bottom: 18px;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+}
+
+
+
+.wrapper {
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.line {
+    height: 28px;
+    background: #FFDC40;
+}
+
+.sort-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sort {
+    margin-bottom: 11px;
+    margin-right: 7px;
+    width: 25px;
+    height: 15px;
+    background-image: url(/icons/sort-down.png);
+    cursor: pointer;
+}
+
+.sort-up {
+    background-image: url(/icons/sort-up.png);
+}
+
+.sort:hover {
+    filter: brightness(0);
+}
+
+.button {
+    width: 150px;
+    padding: 0.8em;
+    background: #833AE0;
+    border-radius: 71px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.answers {
+    width: 100%;
+    padding: 10px 30px;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    margin-bottom: 10px;
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}
+
+.close {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #C4C4C4;
+    border-radius: 100%;
+    position: relative;
+}
+
+.close:before,
+.close:after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left:3.5px;
+    width: 11px;
+    height: 1px;
+    background: #555;
+}
+
+.close:before {
+    webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.close:after {
+    webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.close:hover {
+    background-color: #833AE0;
+}
+
+.close:hover:before,
+.close:hover:after {
+    background: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+.tip {
+    font-size: 13px;
+    color: red;
+    margin-bottom: 10px;
+    transition: 1s all;
+}
