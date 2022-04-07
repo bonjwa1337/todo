@@ -21,6 +21,7 @@ class Deed {
             close.classList.add('close');
             answers.append(dealWrapper);
             deal.value = '';
+            dealWrapper.setAttribute('draggable', true)
             this.item = dealWrapper;
             close.addEventListener('click', () => {
                 this.item.remove();
@@ -28,19 +29,19 @@ class Deed {
             })
             appear();
         } else {
-            
+
             tip.classList.toggle('hidden')
-            setTimeout( () => {
+            setTimeout(() => {
                 tip.style.opacity = '1';
-            },100)
-            setTimeout( () => {
+            }, 100)
+            setTimeout(() => {
                 tip.style.opacity = '0';
-            },2300)
-            setTimeout( () => {
+            }, 2300)
+            setTimeout(() => {
                 tip.classList.toggle('hidden');
-            },3000)
-           
-            
+            }, 3000)
+
+
         }
     }
 }
@@ -49,6 +50,13 @@ class Deed {
 button.addEventListener('click', () => {
     const item = new Deed(deal.value);
     item.createDeed();
+})
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Enter' || e.code ===  'NumpadEnter') {
+        const item = new Deed(deal.value);
+        item.createDeed();
+    }
 })
 
 const appear = () => {
@@ -76,3 +84,40 @@ const compare = (a, b) => {
         a > b ? 1 : 0;
 
 }
+
+
+answers.addEventListener('dragstart', (e) => {
+    e.target.classList.add('selected')
+})
+
+answers.addEventListener('dragend', (e) => {
+    e.target.classList.remove('selected')
+})
+
+answers.addEventListener(`dragover`, (evt) => {
+    // Разрешаем сбрасывать элементы в эту область
+    evt.preventDefault();
+
+    // Находим перемещаемый элемент
+    const activeElement = answers.querySelector(`.selected`);
+    // Находим элемент, над которым в данный момент находится курсор
+    const currentElement = evt.target;
+    // Проверяем, что событие сработало:
+    // 1. не на том элементе, который мы перемещаем,
+    // 2. именно на элементе списка
+    const isMoveable = activeElement !== currentElement &&
+        currentElement.classList.contains(`item`);
+
+    // Если нет, прерываем выполнение функции
+    if (!isMoveable) {
+        return;
+    }
+
+    // Находим элемент, перед которым будем вставлять
+    const nextElement = (currentElement === activeElement.nextElementSibling) ?
+        currentElement.nextElementSibling :
+        currentElement;
+
+    // Вставляем activeElement перед nextElement
+    answers.insertBefore(activeElement, nextElement);
+});
