@@ -62,9 +62,6 @@ const addToLocalStorage = (text, ratio) => {
 }
 
 
-
-
-
 const removeDeed = (item,key) => {
     const removeButton = document.createElement('div');
     item.append(removeButton);
@@ -216,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const text = localStorage.getItem(key).split(' ')[0];
-        const color = localStorage.getItem(key).split(' ')[1];
+        const color = localStorage.getItem(key).split(' ')[localStorage.getItem(key).split(' ').length-1];
         const item = addDeed(text);
         addRatio(item, color);
         removeDeed(item, key);
