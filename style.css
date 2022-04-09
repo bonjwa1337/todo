@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;900&family=Roboto:wght@400;900&display=swap');
 
+:root {
+    --hight-proprity-color: #fe5fda;
+    --middle-proprity-color: #eccbf5;
+    --low-proprity-color: #c9e3fd;
+    --main-color: #833AE0;
+}
+
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -47,7 +56,7 @@ input {
 
 .line {
     height: 28px;
-    background: #833AE0;
+    background: var(--main-color);
 }
 
 .sort-wrapper {
@@ -67,11 +76,39 @@ input {
 }
 
 .ratio-sort {
-    background-image: url(/icons/prioritize.png);
+    margin-bottom: 11px;
+    margin-right: 7px;
+    width: 25px;
+    height: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: var(--middle-proprity-color);
+    position: relative;
 }
 
+
+.ratio-sort:before,
+.ratio-sort:after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 5px;
+}
+
+.ratio-sort:before {
+    top: -8px;
+    background-color: var(--hight-proprity-color);
+
+}
+
+.ratio-sort:after {
+    background-color: var(--low-proprity-color);
+    top: 8px;
+}
+
+
 .name-sort {
-    background-image: url(/icons/arrow.png);
+    background: url(/icons/sort-icon.svg) no-repeat center/cover;
 }
 
 .sort-up {
@@ -94,7 +131,7 @@ input {
 
 .button {
     width: 150px;
-    background: #833AE0;
+    background: var(--main-color);
     border-radius: 71px;
     text-align: center;
     color: #FFFFFF;
@@ -163,7 +200,7 @@ input {
 .close {
     width: 32px;
     height: 32px;
-    border: 1px solid #833ae0;
+    border: 1px solid var(--main-color);
     border-radius: 100%;
     position: relative;
 }
@@ -176,7 +213,7 @@ input {
     left: 8px;
     width: 14px;
     height: 2px;
-    background: #833ae0;
+    background: var(--main-color);
 }
 
 .close:before {
@@ -188,7 +225,7 @@ input {
 }
 
 .close:hover {
-    background-color: #833AE0;
+    background-color: var(--main-color);
 }
 
 .close:hover:before,
@@ -202,7 +239,7 @@ input {
 
 .tip {
     font-size: 13px;
-    color: red;
+    color: var(--hight-proprity-color);
     margin-bottom: 10px;
     transition: 1s all;
 }
@@ -228,15 +265,15 @@ input {
 }
 
 .red {
-    background-color: #C84C44;
+    background-color: var(--hight-proprity-color);
 }
 
 .yellow {
-    background-color: #F0E593;
+    background-color: var(--middle-proprity-color);
 }
 
 .green {
-    background-color: #4D8241;
+    background-color: var(--low-proprity-color);
 }
 
 .selected-ratio {
