@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     for (i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        const text = localStorage.getItem(key).split(' ')[0];
+        const text = localStorage.getItem(key).split(' ').slice(0, localStorage.length-1).join(' ');
         const color = localStorage.getItem(key).split(' ')[localStorage.getItem(key).split(' ').length - 1];
         const item = addDeed(text);
         addRatio(item, color);
