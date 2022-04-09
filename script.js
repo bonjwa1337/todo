@@ -91,7 +91,7 @@ sortButton.forEach(item => {
             target.classList.toggle('sort-up');
         }
         if (target.classList.contains('ratio-sort')) {
-            target.classList.toggle('ratio-sort-up');
+            target.classList.toggle('sort-up');
         }
         const deeds = [...document.querySelectorAll('.item')];
 

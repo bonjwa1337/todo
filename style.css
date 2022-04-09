@@ -13,11 +13,12 @@ main {
 
 section {
     width: 336px;
-    max-height: 397px;
+    max-height: 450px;
     margin: auto;
-    border: 1px solid #C4C4C4;
+    border: 1px solid #c4c4c46f;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.1);
 }
 
 h1 {
@@ -27,11 +28,12 @@ h1 {
 }
 
 input {
-    border: 1px solid #C4C4C4;
+    border: 1px solid #d9d8d87a;
     border-radius: 10px;
     height: 40px;
     width: 100%;
     padding: 10px;
+
 }
 
 
@@ -45,16 +47,18 @@ input {
 
 .line {
     height: 28px;
-    background: #FFDC40;
+    background: #833AE0;
 }
 
 .sort-wrapper {
     width: 100%;
+    margin-right: 40px;
     display: flex;
     justify-content: flex-end;
 }
 
-.sort, .ratio-sort {
+.sort,
+.ratio-sort {
     margin-bottom: 11px;
     margin-right: 7px;
     width: 25px;
@@ -63,23 +67,20 @@ input {
 }
 
 .ratio-sort {
-    background-image: url(/icons/down-arrow-red.png);
-}
-
-.ratio-sort-up {
-    background-image: url(/icons/up-arrow-green.png);
+    background-image: url(/icons/prioritize.png);
 }
 
 .name-sort {
-    background-image: url(/icons/sort-down.png);
+    background-image: url(/icons/arrow.png);
 }
 
 .sort-up {
-    background-image: url(/icons/sort-up.png);
+    transform: rotate(180deg);
 }
 
-.sort:hover, .ratio-sort:hover {
-    filter: brightness(0);
+.sort:hover,
+.ratio-sort:hover {
+    filter: brightness(80%);
 }
 
 .deed-options {
@@ -139,11 +140,10 @@ input {
 .answers {
     width: 100%;
     padding: 10px 30px;
-    border: 1px solid #C4C4C4;
     border-radius: 10px;
     margin-bottom: 16px;
-    overflow-y: scroll;
-    max-height: 130px;
+    overflow-y: auto;
+    max-height: 150px;
 }
 
 .item {
@@ -152,6 +152,8 @@ input {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    padding: 0;
+    overflow: hidden;
 }
 
 .item:last-child {
@@ -159,9 +161,9 @@ input {
 }
 
 .close {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #C4C4C4;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #833ae0;
     border-radius: 100%;
     position: relative;
 }
@@ -170,11 +172,11 @@ input {
 .close:after {
     content: "";
     position: absolute;
-    top: 9px;
-    left: 3.5px;
-    width: 11px;
-    height: 1px;
-    background: #555;
+    top: 14px;
+    left: 8px;
+    width: 14px;
+    height: 2px;
+    background: #833ae0;
 }
 
 .close:before {
@@ -223,19 +225,18 @@ input {
     width: 20px;
     border-radius: 100%;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.1);
-    border: 1px solid black;
 }
 
 .red {
-    background-color: red;
+    background-color: #C84C44;
 }
 
 .yellow {
-    background-color: yellow;
+    background-color: #F0E593;
 }
 
 .green {
-    background-color: green;
+    background-color: #4D8241;
 }
 
 .selected-ratio {
@@ -243,9 +244,7 @@ input {
 }
 
 .ratio-icon {
-    height: 10px;
-    width: 10px;
+    height: 32px;
+    width: 32px;
     border-radius: 100%;
-    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.1);
-    border: 1px solid black;
 }
