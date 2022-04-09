@@ -13,7 +13,7 @@ class Deed {
     createDeed() {
         if (deal.value) {
             this.item = addDeed(this.text);
-            this.ratio = addRatio(this.item, document.querySelector('.selected-ratio').getAttribute('data-priority'));
+            this.ratio = addRatio(this.item, document.querySelector('.selected-ratio').getAttribute('data-color'));
             this.localStorageKey = addToLocalStorage(this.text, this.ratio);
             this.removeButton = removeDeed(this.item, this.localStorageKey);
             appear();
@@ -45,15 +45,23 @@ const addDeed = (text) => {
     return item;
 }
 
-const addRatio = (item, priority) => {
+const addRatio = (item, color) => {
     const ratioIcon = document.createElement('div');
-    ratioIcon.classList.add(priority, 'ratio-icon');
-    priority === 'hight' ? ratioIcon.setAttribute('priority', '2') :
-        priority === 'middle' ?
+    ratioIcon.classList.add(color, 'ratio-icon');
+    color === 'hight' ? ratioIcon.setAttribute('priority', '2') :
+        color === 'middle' ?
         ratioIcon.setAttribute('priority', '1') : ratioIcon.setAttribute('priority', '0')
     item.prepend(ratioIcon)
-    return priority;
+    return color;
 }
+
+const addToLocalStorage = (text, ratio) => {
+    const key = Math.floor(Math.random() * 5000);
+    localStorage.setItem(key, `${text} ${ratio}`);
+    return key;
+}
+
+
 
 
 
@@ -177,7 +185,7 @@ const displayRate = (e) => {
                 if (!activeItem.classList.contains(item)) {
                     const li = document.createElement('li');
                     li.classList.add(item, 'rate-item');
-                    li.setAttribute('data-priority', item)
+                    li.setAttribute('data-color', item)
                     rate.append(li);
                 }
             }
@@ -200,13 +208,6 @@ deal.addEventListener('focus', () => {
     clearRateList();
 })
 
-// localStorage
-
-const addToLocalStorage = (text, ratio) => {
-    const key = Math.floor(Math.random() * 5000);
-    localStorage.setItem(key, `${text} ${ratio}`);
-    return key;
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.length > 0) {
@@ -215,10 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const text = localStorage.getItem(key).split(' ')[0];
-        const priority = localStorage.getItem(key).split(' ')[1];
+        const color = localStorage.getItem(key).split(' ')[1];
         const item = addDeed(text);
-        addRatio(item, priority);
-        console.log(item)
+        addRatio(item, color);
         removeDeed(item, key);
     }
 })
