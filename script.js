@@ -11,16 +11,11 @@ class Deed {
         this.text = text;
     }
     createDeed() {
-
         if (deal.value) {
             this.item = addDeed(this.text);
-            this.ratio = addRatio(this.item);
-            this.removeButton = removeDeed(this.item);
-            this.removeButton.addEventListener('click', () => {
-                this.item.remove();
-                appear();
-            })
-
+            this.ratio = addRatio(this.item, document.querySelector('.selected-ratio').getAttribute('data-priority'));
+            this.localStorageKey = addToLocalStorage(this.text, this.ratio);
+            this.removeButton = removeDeed(this.item, this.localStorageKey);
             appear();
         } else {
 
@@ -41,30 +36,36 @@ class Deed {
 }
 
 const addDeed = (text) => {
-    const dealWrapper = document.createElement('div');
-    dealWrapper.classList.add('item');
-    dealWrapper.textContent = text;
-    answers.append(dealWrapper);
+    const item = document.createElement('div');
+    item.classList.add('item');
+    item.textContent = text;
+    answers.append(item);
     deal.value = '';
-    dealWrapper.setAttribute('draggable', true);
-    return dealWrapper;
+    item.setAttribute('draggable', true);
+    return item;
 }
 
-const addRatio = (dealWrapper) => {
+const addRatio = (item, priority) => {
     const ratioIcon = document.createElement('div');
-    const color = document.querySelector('.selected-ratio').getAttribute('data-color');
-    ratioIcon.classList.add(color, 'ratio-icon');
-    color === 'red' ? ratioIcon.setAttribute('priority', '2') : 
-    color === 'yellow' ? 
-    ratioIcon.setAttribute('priority', '1') : ratioIcon.setAttribute('priority', '0')
-
-    dealWrapper.prepend(ratioIcon)
+    ratioIcon.classList.add(priority, 'ratio-icon');
+    priority === 'hight' ? ratioIcon.setAttribute('priority', '2') :
+        priority === 'middle' ?
+        ratioIcon.setAttribute('priority', '1') : ratioIcon.setAttribute('priority', '0')
+    item.prepend(ratioIcon)
+    return priority;
 }
 
-const removeDeed = (dealWrapper) => {
+
+
+const removeDeed = (item,key) => {
     const removeButton = document.createElement('div');
-    dealWrapper.append(removeButton);
+    item.append(removeButton);
     removeButton.classList.add('close');
+    removeButton.addEventListener('click', () => {
+        item.remove();
+        localStorage.removeItem(key);
+        appear();
+    })
     return removeButton;
 }
 
@@ -86,6 +87,7 @@ const appear = () => {
 
 sortButton.forEach(item => {
     item.addEventListener('click', (e) => {
+
         const target = e.target;
         if (target.classList.contains('name-sort')) {
             target.classList.toggle('sort-up');
@@ -161,7 +163,7 @@ answers.addEventListener(`dragover`, (evt) => {
     answers.insertBefore(activeElement, nextElement);
 });
 
-const ratioEl = ['green', 'red', 'yellow'];
+const ratioEl = ['low', 'hight', 'middle'];
 
 rate.addEventListener('click', (e) => {
     displayRate(e);
@@ -175,7 +177,7 @@ const displayRate = (e) => {
                 if (!activeItem.classList.contains(item)) {
                     const li = document.createElement('li');
                     li.classList.add(item, 'rate-item');
-                    li.setAttribute('data-color', item)
+                    li.setAttribute('data-priority', item)
                     rate.append(li);
                 }
             }
@@ -196,4 +198,27 @@ const clearRateList = () => {
 
 deal.addEventListener('focus', () => {
     clearRateList();
+})
+
+// localStorage
+
+const addToLocalStorage = (text, ratio) => {
+    const key = Math.floor(Math.random() * 5000);
+    localStorage.setItem(key, `${text} ${ratio}`);
+    return key;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.length > 0) {
+        answers.classList.toggle('hidden');
+    }
+    for (i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const text = localStorage.getItem(key).split(' ')[0];
+        const priority = localStorage.getItem(key).split(' ')[1];
+        const item = addDeed(text);
+        addRatio(item, priority);
+        console.log(item)
+        removeDeed(item, key);
+    }
 })
