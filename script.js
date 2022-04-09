@@ -3,7 +3,8 @@ const deal = document.querySelector('.deed-name'),
     button = document.querySelector('.button'),
     sortButton = document.querySelectorAll('.sort'),
     tip = document.querySelector('.tip'),
-    rate = document.querySelector('.rate');
+    rate = document.querySelector('.rate'),
+    filterButtons = document.querySelectorAll('.filter');
 
 
 class Deed {
@@ -62,7 +63,7 @@ const addToLocalStorage = (text, ratio) => {
 }
 
 
-const removeDeed = (item,key) => {
+const removeDeed = (item, key) => {
     const removeButton = document.createElement('div');
     item.append(removeButton);
     removeButton.classList.add('close');
@@ -213,9 +214,50 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const text = localStorage.getItem(key).split(' ')[0];
-        const color = localStorage.getItem(key).split(' ')[localStorage.getItem(key).split(' ').length-1];
+        const color = localStorage.getItem(key).split(' ')[localStorage.getItem(key).split(' ').length - 1];
         const item = addDeed(text);
         addRatio(item, color);
         removeDeed(item, key);
     }
 })
+
+filterButtons.forEach(item => {
+    item.addEventListener('click', (e) => {
+        const target = e.target;
+        const buttons = filterButtons;
+        buttons.forEach(item => {
+            item == target ? target.classList.toggle('scaled') : item.classList.contains('scaled') ?
+                item.classList.toggle('scaled') : null;
+            target.classList.contains('scaled') ? activeFilter = target : activeFilter = undefined;
+        })
+        const activeElements = document.querySelectorAll('.item');
+        if (activeElements.length == 0) return;
+
+        if (activeFilter) {
+            switch (activeFilter.getAttribute('data-priority')) {
+                case '0':
+                    filterByColor(0, activeElements, buttons)
+                    break;
+                case '1':
+                    filterByColor(1, activeElements, buttons)
+                    break;
+                case '2':
+                    filterByColor(2, activeElements, buttons)
+                    break;
+            }
+        } else {
+            filterByColor(buttons.length, activeElements, buttons)
+        }
+
+    })
+})
+
+const filterByColor = (scaled, activeElements, buttons) => {
+    activeElements.forEach(item => {
+        if (scaled < buttons.length) {
+            item.firstChild.getAttribute('priority') == scaled ? item.style.display = 'flex' : item.style.display = 'none';
+        } else {
+            item.style.display = 'flex';
+        }
+    })
+}

@@ -59,27 +59,37 @@ input {
     background: var(--main-color);
 }
 
-.sort-wrapper {
-    width: 100%;
-    margin-right: 40px;
+.sort-items {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
 }
 
+.sort-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.sort-items > div {
+    margin-left: 5px;
+}
+
+
 .sort,
-.ratio-sort {
-    margin-bottom: 11px;
-    margin-right: 7px;
+.ratio-sort,
+.filter {
     width: 25px;
     height: 25px;
     cursor: pointer;
     transition: 0.6s all;
 }
 
+.filter {
+    border-radius: 100%;
+}
+
 .ratio-sort {
-    margin-bottom: 11px;
-    margin-right: 7px;
-    width: 25px;
     height: 5px;
     margin-top: 10px;
     cursor: pointer;
@@ -121,8 +131,9 @@ input {
 }
 
 .sort:hover,
-.ratio-sort:hover {
-    filter: brightness(80%);
+.ratio-sort:hover,
+.filter:hover {
+    filter: brightness(90%);
 }
 
 .deed-options {
@@ -289,4 +300,8 @@ input {
     height: 32px;
     width: 32px;
     border-radius: 100%;
+}
+
+.scaled {
+    transform: scale(1.2);
 }
