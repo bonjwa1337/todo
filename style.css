@@ -123,7 +123,7 @@ input {
 
 
 .name-sort {
-    background: url(/icons/sort-icon.svg) no-repeat center/cover;
+    background: url(./icons/sort-icon.svg) no-repeat center/cover;
 }
 
 .sort-up {
